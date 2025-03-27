@@ -10,12 +10,8 @@ const ChoicesScreen: React.FC = () => {
             {/* Leoncio Nuggets */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={async () => {
-                    try {
-                        await TodoActions.addLeoncioNuggets();
-                    } catch (error) {
-                        console.error('Error adding Leoncio Nuggets:', error);
-                    }
+                onPress={() => {
+                    TodoActions.addLeoncioNuggets();
                 }}
             >
                 <Text style={styles.buttonText}>Leoncio Nuggets</Text>
@@ -24,12 +20,8 @@ const ChoicesScreen: React.FC = () => {
             {/* Mejaro Fries */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={async () => {
-                    try {
-                        await TodoActions.addMejaroFries();
-                    } catch (error) {
-                        console.error('Error adding Mejaro Fries:', error);
-                    }
+                onPress={() => {
+                    TodoActions.addMejaroFries();
                 }}
             >
                 <Text style={styles.buttonText}>Mejaro Fries</Text>
@@ -38,12 +30,8 @@ const ChoicesScreen: React.FC = () => {
             {/* Sir Juice */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={async () => {
-                    try {
-                        await TodoActions.addSirJuice();
-                    } catch (error) {
-                        console.error('Error adding Sir Juice:', error);
-                    }
+                onPress={() => {
+                    TodoActions.addSirJuice();
                 }}
             >
                 <Text style={styles.buttonText}>Sir Juice</Text>
@@ -52,12 +40,8 @@ const ChoicesScreen: React.FC = () => {
             {/* Cavite Love Drink */}
             <TouchableOpacity
                 style={styles.button}
-                onPress={async () => {
-                    try {
-                        await TodoActions.addCaviteLoveJuice();
-                    } catch (error) {
-                        console.error('Error adding Cavite Love Drink:', error);
-                    }
+                onPress={() => {
+                    TodoActions.addCaviteLoveJuice();
                 }}
             >
                 <Text style={styles.buttonText}>Cavite Love Drink</Text>

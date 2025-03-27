@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, FlatList, Alert, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, View, FlatList, Alert, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Button, Input, ListItem, Icon } from 'react-native-elements';
 import { supabase } from './supabase';
 
@@ -29,13 +29,6 @@ export default function TodoList({ user }) {
     return { data, error };
   }
 
-  // async function addTodoGlobal()
- 
-// async function addTodoGlobal() 
-
-// Removed duplicate toggleComplete function
-
-
   async function addTodo() {
     if (newTask.trim().length === 0) {
       Alert.alert('Please enter a task');
@@ -54,6 +47,98 @@ export default function TodoList({ user }) {
     } else {
       setTodos([...data, ...Todos]);
       setNewTask('');
+    }
+    setLoading(false);
+    return { data, error };
+  }
+
+  async function addLeoncioNuggets() {
+    if (newTask.trim().length === 0) {
+      Alert.alert('Please enter a task');
+      return { error: 'Empty task' };
+    }
+
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('Todos')
+      .insert([{ task: 'Leoncio Nuggets', user_id: user.id }])
+      .select();
+
+    if (error) {
+      console.error('Error adding todo:', error);
+      Alert.alert('Error adding todo');
+    } else {
+      setTodos([...data, ...Todos]);
+      setNewTask('Leoncio Nuggets');
+    }
+    setLoading(false);
+    return { data, error };
+  }
+
+  async function addMejaroFries() {
+    if (newTask.trim().length === 0) {
+      Alert.alert('Please enter a task');
+      return { error: 'Empty task' };
+    }
+
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('Todos')
+      .insert([{ task: 'Mejaro Fries', user_id: user.id }])
+      .select();
+
+    if (error) {
+      console.error('Error adding todo:', error);
+      Alert.alert('Error adding todo');
+    } else {
+      setTodos([...data, ...Todos]);
+      setNewTask('Mejaro Fries');
+    }
+    setLoading(false);
+    return { data, error };
+  }
+
+  async function addSirJuice() {
+    if (newTask.trim().length === 0) {
+      Alert.alert('Please enter a task');
+      return { error: 'Empty task' };
+    }
+
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('Todos')
+      .insert([{ task: 'Sir Juice', user_id: user.id }])
+      .select();
+
+    if (error) {
+      console.error('Error adding todo:', error);
+      Alert.alert('Error adding todo');
+    } else {
+      setTodos([...data, ...Todos]);
+      setNewTask('Sir Juice');
+    }
+    setLoading(false);
+    return { data, error };
+  }
+
+  async function addCaviteLoveJuice() {
+    if (newTask.trim().length === 0) {
+      Alert.alert('Please enter a task');
+      return { error: 'Empty task' };
+    }
+
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('Todos')
+      .insert([{ task: 'Cavite Love Juice', user_id: user.id }])
+      .select();
+
+    if (error) {
+      console.error('Error adding todo:', error);
+      Alert.alert('Error adding todo');
+    } else {
+      setTodos([...data, ...Todos]);
+      setNewTask('Cavite Love Juice');
     }
     setLoading(false);
     return { data, error };
@@ -114,7 +199,7 @@ export default function TodoList({ user }) {
         <Button title="Sign Out" onPress={signOut} type="clear" />
       </View>
       
-      <View style={styles.inputContainer}>
+      {/* <View style={styles.inputContainer}>
         <Input
           placeholder="Add a new task"
           value={newTask}
@@ -129,19 +214,61 @@ export default function TodoList({ user }) {
           }
           onSubmitEditing={addTodo}
         />
-      </View>
+      </View> */}
 
-      <View>
-        <Button title="Choices" onPress={navigator} disabled={loading} />
-      </View>
+      <View style={styles.container}>
+  <Text style={styles.header}>Choose your Food</Text>
+
+  {/* Leoncio Nuggets */}
+  <TouchableOpacity
+    style={styles.button}
+    onPress={() => {
+      setNewTask('Leoncio Nuggets');
+      addLeoncioNuggets('Leoncio Nuggets');
+    }}
+  >
+    <Text style={styles.buttonText}>Leoncio Nuggets</Text>
+  </TouchableOpacity>
+
+  {/* Mejaro Fries */}
+  <TouchableOpacity
+    style={styles.button}
+    onPress={() => {
+      addMejaroFries('Mejaro Fries');
+    }}
+  >
+    <Text style={styles.buttonText}>Mejaro Fries</Text>
+  </TouchableOpacity>
+
+  {/* Sir Juice */}
+  <TouchableOpacity
+    style={styles.button}
+    onPress={() => {
+      addSirJuice('Sir Juice');
+    }}
+  >
+    <Text style={styles.buttonText}>Sir Juice</Text>
+  </TouchableOpacity>
+
+  {/* Cavite Love Drink */}
+  <TouchableOpacity
+    style={styles.button}
+    onPress={() => {
+      addCaviteLoveJuice('Cavite Love Drink');
+    }}
+  >
+    <Text style={styles.buttonText}>Cavite Love Drink</Text>
+  </TouchableOpacity>
+</View>
       
       {loading && <ActivityIndicator size="large" />}
       
       <FlatList
+      style={{ position: 'relative', top: 100,  }}
         data={Todos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ListItem.Swipeable
+          <ListItem.Swipeable 
             rightContent={
               <Button
                 title="Delete"
@@ -151,13 +278,10 @@ export default function TodoList({ user }) {
               />
             }
           >
-        <ListItem.CheckBox
-          onPress={() => toggleComplete(item.id, item.is_completed)}
-        />
             <ListItem.Content>
               <ListItem.Title
                 style={
-                  item.is_completed ? styles.completedTask : styles.task
+                  item.is_completed ? styles.completedTask : styles.task 
                 }
               >
                 {item.task}
@@ -193,9 +317,23 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through',
     color: 'gray',
   },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#007BFF',
+    width: '80%',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 20,
+    alignSelf: 'center',
+  },
 });
 
-export const addLeoncioNuggets = async () => {
+const addLeoncioNuggets = async () => {
   if (!task || task.trim().length === 0) {
     Alert.alert('Please provide a valid task');
     return { error: 'Invalid task' };
@@ -216,7 +354,7 @@ export const addLeoncioNuggets = async () => {
   return { data, error };
 };
 
-export const addCaviteLoveJuice = async (task) => {
+const addCaviteLoveJuice = async (task) => {
   if (!task || task.trim().length === 0) {
     Alert.alert('Please provide a valid task');
     return { error: 'Invalid task' };
@@ -237,7 +375,7 @@ export const addCaviteLoveJuice = async (task) => {
   return { data, error };
 };
 
-export const addMejaroFries = async (task) => {
+const addMejaroFries = async (task) => {
   if (!task || task.trim().length === 0) {
     Alert.alert('Please provide a valid task');
     return { error: 'Invalid task' };
@@ -258,7 +396,7 @@ export const addMejaroFries = async (task) => {
   return { data, error };
 };
 
-export const addSirJuice = async (task) => {
+const addSirJuice = async (task) => {
   if (!task || task.trim().length === 0) {
     Alert.alert('Please provide a valid task');
     return { error: 'Invalid task' };

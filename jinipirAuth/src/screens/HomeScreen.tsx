@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import Auth from '../components/Auth';
 import TodoList from "../config/TodoList";
 import { supabase } from "../config/supabase";
 import { User } from "@supabase/supabase-js";
+
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -34,7 +35,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            {user ? <TodoList user={user} navigation={navigation} /> : <Auth />}
+            {user ? <TodoList user={user} /> : <Auth />}
         </View>
     );
 };
@@ -46,4 +47,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default HomeScreen; // Moved to the top level of the file

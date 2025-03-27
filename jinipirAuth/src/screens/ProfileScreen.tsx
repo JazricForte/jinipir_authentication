@@ -16,7 +16,6 @@ const ProfileScreen: React.FC<Props> = ({ route }) => {
         <View style={styles.container}>
             <Text style={styles.header}>Your Profile</Text>
             <Text style={styles.text}>User ID: {userId}</Text>
-            <Text style={styles.text}>This is your profile screen</Text>
             </View>
     );
 };
