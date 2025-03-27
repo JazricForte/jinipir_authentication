@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import ChoicesScreen from "../screens/ChoicesScreen";
+// import ChoicesScreen from "../screens/ChoicesScreen";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -38,12 +38,12 @@ const AppNavigator: React.FC = () => {
                     component={ProfileScreen} 
                     options={{ title: 'Profile' }} 
                 />
-                <Stack.Screen
+                {/* <Stack.Screen
                     name="Choices"
                     component={ChoicesScreen}
                     options={{ title: 'Choices' }}
                 >
-                </Stack.Screen>
+                </Stack.Screen> */}
             </Stack.Navigator>
         </NavigationContainer>
     );

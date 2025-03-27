@@ -216,8 +216,8 @@ export default function TodoList({ user }) {
         />
       </View> */}
 
-      <View style={styles.container}>
-  <Text style={styles.header}>Choose your Food</Text>
+      <View style={styles.header2}>
+  <Text style={styles.headerText}>Choose your Food</Text>
 
   {/* Leoncio Nuggets */}
   <TouchableOpacity
@@ -264,7 +264,7 @@ export default function TodoList({ user }) {
       {loading && <ActivityIndicator size="large" />}
       
       <FlatList
-      style={{ position: 'relative', top: 100,  }}
+      style={{ position: 'relative', top: 30,  }}
         data={Todos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -305,6 +305,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: 20,
+  },
+  header2: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   inputContainer: {
     marginBottom: 20,
